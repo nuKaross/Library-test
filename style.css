@@ -1,0 +1,25 @@
+body {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+h1 {
+  background-color: gray;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+}
+#bookContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  grid-template-rows: minmax(200px, 250px);
+  gap: 40px;
+  height: 100vh;
+  justify-content: center;
+}
+
+.addNew {
+  margin: 50px;
+  justify-content: space-around;
+  display: flex;
+}
