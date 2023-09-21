@@ -2,25 +2,24 @@
 const myLibrary = []
 
 //constructor
-function Book(bookName, author, pages, read) {
-  this.bookName = bookName
-  this.author = author
-  this.pages = pages
-  this.read = read
-}
-
-Book.prototype.isRead = function () {
-  return this.read ? 'read' : 'not read'
-}
-
-Book.prototype.info = function () {
-  return `The book name is ${this.bookName} by ${this.author}, it has ${
-    this.pages
-  } pages and you have ${this.isRead()} it. `
-}
-
-Book.prototype.toggleRead = function () {
-  this.read = !this.read
+class Book {
+  constructor(bookName, author, pages, read) {
+    this.bookName = bookName
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
+  isRead() {
+    return this.read ? 'read' : 'not read'
+  }
+  info() {
+    return `The book name is ${this.bookName} by ${this.author}, it has ${
+      this.pages
+    } pages and you have ${this.isRead()} it. `
+  }
+  toggleRead() {
+    this.read = !this.read
+  }
 }
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 235, false)
