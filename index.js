@@ -2,19 +2,23 @@
 const myLibrary = []
 
 //constructor
-function Book(bookName, author, pages, read) {
-  this.bookName = bookName
-  this.author = author
-  this.pages = pages
-  this.read = read
-
-  this.isRead = function () {
+class Book {
+  constructor(bookName, author, pages, read) {
+    this.bookName = bookName
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
+  isRead() {
     return this.read ? 'read' : 'not read'
   }
-  this.info = function () {
+  info() {
     return `The book name is ${this.bookName} by ${this.author}, it has ${
       this.pages
     } pages and you have ${this.isRead()} it. `
+  }
+  toggleRead() {
+    this.read = !this.read
   }
 }
 
@@ -34,7 +38,8 @@ function addBook() {
   const bookName = document.getElementById('bookName').value
   const author = document.getElementById('author').value
   const pages = document.getElementById('pageNum').value
-  const isRead = document.querySelectorAll('.readCheckbox')
+  const isReadCheckbox = document.getElementById('isRead')
+  const isRead = isReadCheckbox.checked
   const newBook = new Book(bookName, author, pages, isRead)
 
   myLibrary.push(newBook)
@@ -50,9 +55,10 @@ function displayBooks() {
     let bookContainer = document.getElementById('bookContainer')
     let book = document.createElement('div')
     book.classList.add(`book`)
-    book.textContent = `Title: ${newBook.bookName}, Author: ${newBook.author}, Pages: ${newBook.pages}, Read: ${
-      newBook.isRead() ? 'Yes' : 'No'
-    }`
+    book.innerHTML = `<p><b>Title: ${newBook.bookName}</b></p> 
+    <p><b> Author: ${newBook.author}</b></p> 
+   <p> Pages: ${newBook.pages}</p> 
+    <p> Status: ${newBook.isRead()}</p> `
     book.setAttribute('data-index', index)
 
     const deleteButton = document.createElement('button')
@@ -66,8 +72,8 @@ function displayBooks() {
     readBtn.textContent = 'Read Check'
     readBtn.classList.add('readBtn')
     readBtn.addEventListener('click', () => {
-      readSwitch(parseInt(index))
-    }) // NEED TO ADD HERE WHAT TO SEND TO 'read' FUNCTION FOR SWITCHING
+      toggleRead(parseInt(index))
+    })
     book.appendChild(readBtn)
     book.appendChild(deleteButton)
     bookContainer.appendChild(book)
@@ -81,6 +87,8 @@ function deleteBook(index) {
 }
 
 //READ
-function readSwitch(index) {
+
+function toggleRead(index) {
+  myLibrary[index].toggleRead()
   displayBooks()
 }
